@@ -1,5 +1,5 @@
 <?php
-
+// app/core/Controller.php
 class Controller
 {
     public function model($model)
