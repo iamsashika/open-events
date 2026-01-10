@@ -1,6 +1,6 @@
 # Project Folder Structure – open-events
 
-
+```text
 open-events/
 │
 ├── public/
@@ -137,7 +137,7 @@ open-events/
 │   └── schema.sql
 │
 └── README.md
-
+```
 
 # Project TODO List – Event Management Application
 
