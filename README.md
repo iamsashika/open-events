@@ -160,7 +160,7 @@ open-events/
 
 ---
 
-## 👤 User Management (Admin)
+## User Management (Admin)
 
 - [ ] List all users
 - [ ] View user profile
@@ -173,7 +173,7 @@ open-events/
 
 ---
 
-## 👤 User Profile (All Users)
+## User Profile (All Users)
 
 - [ ] View own profile
 - [ ] Update profile details
@@ -183,7 +183,7 @@ open-events/
 
 ---
 
-## 📅 Event Management
+## Event Management
 
 ### Admin
 
@@ -321,22 +321,26 @@ open-events/
 
 ## Users Table
 
-| Column Name   | Data Type    | Description        |
-| ------------- | ------------ | ------------------ |
-| id            | BIGINT       | User ID            |
-| avatar        | VARCHAR(255) | Profile picture    |
-| first_name    | VARCHAR(100) | First name         |
-| last_name     | VARCHAR(100) | Last name          |
-| email         | VARCHAR(150) | Email address      |
-| phone         | VARCHAR(20)  | Phone number       |
-| password_hash | VARCHAR(255) | Encrypted password |
-| role          | ENUM         | User role          |
-| status        | ENUM         | Account status     |
-| created_at    | TIMESTAMP    | Created time       |
-| updated_at    | TIMESTAMP    | Updated time       |
-| created_by    | BIGINT       | Created by         |
-| updated_by    | BIGINT       | Updated by         |
-| deleted_at    | TIMESTAMP    | Soft delete        |
+| Column Name             | Data Type    | Description             |
+| ----------------------- | ------------ | ----------------------- |
+| id                      | BIGINT       | User ID                 |
+| avatar                  | VARCHAR(255) | Profile picture         |
+| first_name              | VARCHAR(100) | First name              |
+| last_name               | VARCHAR(100) | Last name               |
+| email                   | VARCHAR(150) | Email address           |
+| phone                   | VARCHAR(20)  | Phone number            |
+| password_hash           | VARCHAR(255) | Encrypted password      |
+| role                    | ENUM         | User role               |
+| status                  | ENUM         | Account status          |
+| verification_code       | VARCHAR(100) | Email verification code |
+| verification_expires_at | DATETIME     | Verification expiry     |
+| reset_code              | VARCHAR(100) | Password reset code     |
+| reset_expires_at        | DATETIME     | Reset code expiry       |
+| created_at              | TIMESTAMP    | Created time            |
+| updated_at              | TIMESTAMP    | Updated time            |
+| created_by              | BIGINT       | Created by              |
+| updated_by              | BIGINT       | Updated by              |
+| deleted_at              | TIMESTAMP    | Soft delete             |
 
 ```sql
 
@@ -349,16 +353,17 @@ CREATE TABLE users (
     phone VARCHAR(20) NULL,
     password_hash VARCHAR(255) NOT NULL,
     role ENUM('admin','organizer','attendee') DEFAULT 'attendee',
-    status ENUM('active','inactive','blocked') DEFAULT 'active',
-
+    status ENUM('active','inactive','blocked') DEFAULT 'inactive',
+    verification_code VARCHAR(100) NULL,
+    verification_expires_at DATETIME NULL,
+    reset_code VARCHAR(100) NULL,
+    reset_expires_at DATETIME NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     created_by BIGINT NULL,
     updated_by BIGINT NULL,
-    deleted_at TIMESTAMP NULL,
-
-    INDEX idx_users_deleted (deleted_at)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    deleted_at TIMESTAMP NULL
+);
 
 ```
 
@@ -542,3 +547,21 @@ CREATE TABLE payments (
     INDEX idx_payments_deleted (deleted_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ```
+
+A/L 2025 - ICT Answers
+
+1 - 1 11 - 1 21 - 5 31 - 3 41 - 1
+2 - 5 12 - 2 22 - 3 32 - 4 42 - 5
+3 - 4 13 - 2 23 - 3 33 - 3 43 - 2
+4 - 1 14 - 3 24 - 5 34 - 1 44 - 4
+5 - 1 15 - 1 25 - 3 35 - 5 45 - 3
+6 - 5 16 - 3 26 - 5 36 - 2 46 - 5 \*
+7 - 5 17 - 3 27 - 1 37 - 4 47 - 2
+8 - 3 18 - 3 28 - 5 38 - 2 48 - 4
+9 - 3 19 - 2 29 - 3 39 - 2 49 - 3
+10 - 5 20 - 3 30 - 4 40 - 3 50 - 5
+
+For Question 46, they might pick 3 as well.
+But the most accurate answer is 5.
+
+_Changes may apply after the official release._

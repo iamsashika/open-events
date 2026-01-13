@@ -4,33 +4,38 @@ class DashboardController extends Controller
 {
     public function __construct()
     {
-        if (!isset($_SESSION['user'])) {
-            header('Location: /auth/login');
-            exit;
-        }
+        // if (!isset($_SESSION['user'])) {
+        //     $this->redirect('auth/login');
+        //     exit;
+        // }
     }
 
     public function index()
     {
         $role = $_SESSION['user']['role'];
+        $this->view('dashboard/index');
 
-        switch ($role) {
-            case 'admin':
-                header('Location: /dashboard/admin');
-                break;
+        // $this->redirect('dashboard');
 
-            case 'organizer':
-                header('Location: /dashboard/organizer');
-                break;
-
-            case 'attendee':
-                header('Location: /dashboard/attendee');
-                break;
-
-            default:
-                echo "Invalid role";
-        }
         exit;
+
+        // switch ($role) {
+        //     case 'admin':
+        //         $this->redirect('dashboard/admin');
+        //         break;
+
+        //     case 'organizer':
+        //         $this->redirect('dashboard/organizer');
+        //         break;
+
+        //     case 'attendee':
+        //         $this->redirect('dashboard/attendee');
+        //         break;
+
+        //     default:
+        //         echo "Invalid role";
+        // }
+        // exit;
     }
 
     public function admin()

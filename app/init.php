@@ -5,6 +5,10 @@ session_start();
 require_once __DIR__ . '/config/config.php';
 require_once __DIR__ . '/core/Database.php';
 
+require_once __DIR__ . '/helpers/url.php';
+require_once __DIR__ . '/helpers/flash.php';
+require_once __DIR__ . '/helpers/auth-guard.php';
+
 require_once __DIR__ . '/core/App.php';
 require_once __DIR__ . '/core/Controller.php';
 require_once __DIR__ . '/core/Model.php';
